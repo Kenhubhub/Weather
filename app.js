@@ -2,15 +2,18 @@ const cityForm = document.querySelector("form");
 const citynameui = document.querySelector("#city-name");
 const weatherui = document.querySelector("#weather-condition");
 const temperatureui = document.querySelector("#temperature");
-
+const card = document.querySelector("#card");
+card.style.display = "none";
 const updateUI = (data) => {
-    let cityDets = data.cityDets;
-    let weather = data.weather;
-    console.log(cityDets.AdministrativeArea.EnglishName)
+    // let cityDets = data.cityDets;
+    // let weather = data.weather;
+    const {cityDets,weather} = data;
+    
     citynameui.textContent = cityDets.AdministrativeArea.EnglishName;
     weatherui.textContent = weather.WeatherText;
-    console.log(weather.Temperature.Metric.value);
     temperatureui.textContent = weather.Temperature.Metric.Value;
+    
+    card.style.display = "";
 }
 const updateCity = async (city) => {
     const cityDets = await getCity(city);
@@ -24,7 +27,7 @@ const updateCity = async (city) => {
 cityForm.addEventListener("submit",e => {
     e.preventDefault();
     //get city value
-    const city = cityForm.city.value;;
+    const city = cityForm.city.value;
     cityForm.reset();
 
     //update the ui with new city

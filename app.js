@@ -3,6 +3,8 @@ const citynameui = document.querySelector("#city-name");
 const weatherui = document.querySelector("#weather-condition");
 const temperatureui = document.querySelector("#temperature");
 const card = document.querySelector("#card");
+const iconContainer = document.querySelector("#icon");
+
 card.style.display = "none";
 const updateUI = (data) => {
     // let cityDets = data.cityDets;
@@ -12,7 +14,8 @@ const updateUI = (data) => {
     citynameui.textContent = cityDets.AdministrativeArea.EnglishName;
     weatherui.textContent = weather.WeatherText;
     temperatureui.textContent = weather.Temperature.Metric.Value;
-    
+    let icon_number = weather.WeatherIcon;
+    iconContainer.innerHTML = `<img src="icons/${icon_number}.svg">`
     card.style.display = "";
 }
 const updateCity = async (city) => {

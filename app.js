@@ -6,6 +6,7 @@ const card = document.querySelector("#card");
 const iconContainer = document.querySelector("#icon");
 const image_holder = document.querySelector("#image-holder");
 card.style.display = "none";
+
 const updateUI = (data) => {
     // let cityDets = data.cityDets;
     // let weather = data.weather;
@@ -42,6 +43,13 @@ cityForm.addEventListener("submit",e => {
     updateCity(city)
     .then(data => {console.log(data); updateUI(data); })
     .catch(err => console.log(err));
+
+    localStorage.setItem("city",city)
 })
 
 
+if(localStorage.getItem("city")){
+    updateCity(localStorage.getItem("city"))
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+}
